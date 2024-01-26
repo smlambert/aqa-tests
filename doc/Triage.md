@@ -1,19 +1,5 @@
 # Test Triage at Adoptium
 
-## Generate a Release Summary Report
-
-Locate the pipeline you wish to triage in the ["By Pipeline" view](https://trss.adoptium.net/tests/Test) of TRSS.
-
-![image](https://user-images.githubusercontent.com/93431609/216171285-c313c957-6c8e-49df-95dd-6a68a9897f90.png)
-
-Navigate to the Grid view by clicking on the Grid link for the pipeline you wish to triage and click on the Release Summary Report button at the top of the Grid view page.
-
-![image](https://user-images.githubusercontent.com/93431609/216171387-abebba1d-0ff7-46a9-b486-8aba8fc4bcbc.png)
-
-Click on the 'Copy` icon and paste the .md formatted content into a new Github issue that you wish to use to track triage investigation.
-
-![image](https://user-images.githubusercontent.com/93431609/216171428-705c1933-eea4-4598-a9f2-e488c229bab0.png)
-
 ## Triage Guidance
 
 There are many different test jobs running at the adoptium project.  No matter which test jobs are being triaged, there is a straight-forward pattern to follow.
@@ -48,3 +34,41 @@ There are many different test jobs running at the adoptium project.  No matter w
   - for other tests (like system, external and perf tests), tests are typically disabled via the associated playlist.xml (see [example playlist](https://github.com/adoptium/aqa-tests/blob/master/external/example-test/playlist.xml)) file either by using `<platformRequirements>^os.win</platformRequirements>` for permanent exclusion based on platform, or `<disable>` tag for temporary exclusion.
 
 ![Common Triage Paths](./diagrams/commonTriagePaths.png)
+
+```mermaid
+flowchart TD
+    A(Categorize) --> B(Product)
+    A(Categorize) --> C(Test)
+    A(Categorize) --> D(Infra)
+    A(Categorize) --> E(Unknown)
+    B ----> F(Issue exists?)
+    C ----> F(Issue exists?)
+    D ----> F(Issue exists?)
+    L --[suspect infra]--> G(Deep History / Machines)
+    L --[suspect prod/test]--> H(Upstream Issue)
+    L --[no clue]--> I(Other Vendor Behaviour)
+    E ----> L(Apply Methods of Determination)
+    F --[no]--> J(Raise Issue)
+    F --[yes]--> K(Update Existing Issue)
+    J --[release triage]--> M(Blocking or Non-blocking Determination by PMC)
+    I ----> N(Determination Complete)
+    G ----> N(Determination Complete)
+    H ----> N(Determination Complete)
+    N ----> A(Categorize)
+```
+
+## Generate a Release Summary Report
+
+This is a useful tool when trying to triage a full release.  
+
+Locate the pipeline you wish to triage in the ["By Pipeline" view](https://trss.adoptium.net/tests/Test) of TRSS.
+
+![image](https://user-images.githubusercontent.com/93431609/216171285-c313c957-6c8e-49df-95dd-6a68a9897f90.png)
+
+Navigate to the Grid view by clicking on the Grid link for the pipeline you wish to triage and click on the Release Summary Report button at the top of the Grid view page.
+
+![image](https://user-images.githubusercontent.com/93431609/216171387-abebba1d-0ff7-46a9-b486-8aba8fc4bcbc.png)
+
+Click on the 'Copy` icon and paste the .md formatted content into a new Github issue that you wish to use to track triage investigation.
+
+![image](https://user-images.githubusercontent.com/93431609/216171428-705c1933-eea4-4598-a9f2-e488c229bab0.png)
