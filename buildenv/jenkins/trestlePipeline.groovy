@@ -57,7 +57,7 @@ def generateJobs(jobJdkVersion, upstreamRepo, upstreamBranch, jobPlatforms, test
                // childParams << string(name: "defaultsJson", value: ourDefaults)
                def addBldArgs = "-r ${upstreamRepo} -b ${upstreamBranch} --disable-adopt-branch-safety"
                echo "additionalBuildArgs: ${addBldArgs}"
-               childParams << string(name: "additionalBuildArgs", value: ${addBldArgs})
+               childParams << string(name: "additionalBuildArgs", value: addBldArgs)
                
                JOBS["${TRESTLE_JOB_NAME}"] = {
                     def trestleJob = build job: TRESTLE_JOB_NAME, parameters: childParams, propagate: false, wait: true
