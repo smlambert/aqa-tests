@@ -13,50 +13,20 @@
 # limitations under the License.
 -->
 <playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../TKG/resources/playlist.xsd">
-	<include>../jck.mk</include>
+	<!-- <include>../jck.mk</include> -->
 	<test>
-		<testCaseName>jckinteractives_custom</testCaseName>
+		<testCaseName>tap_status_report</testCaseName>
 		<variations>
 			<variation>NoOptions</variation>
 		</variations>
-		<command>echo "run arctic command with custom parameter" \
+		<command>echo "run status-updater (non-verbose option for jck), generates artifact .md file with table" \
 		$(TEST_STATUS);
 		</command>
 		<levels>
 			<level>dev</level>
 		</levels>
 		<groups>
-			<group>jck</group>
-		</groups>
-	</test>
-    	<test>
-		<testCaseName>jckinteractives_aw</testCaseName>
-		<variations>
-			<variation>NoOptions</variation>
-		</variations>
-		<command>echo "run arctic command for awt" \
-		$(TEST_STATUS);
-		</command>
-		<levels>
-			<level>special</level>
-		</levels>
-		<groups>
-			<group>jck</group>
-		</groups>
-	</test>
-    	<test>
-		<testCaseName>jckinteractives_sw</testCaseName>
-		<variations>
-			<variation>NoOptions</variation>
-		</variations>
-		<command>echo "run arctic command for swing+" \
-		$(TEST_STATUS);
-		</command>
-		<levels>
-			<level>dev</level>
-		</levels>
-		<groups>
-			<group>jck</group>
+			<group>functional</group>
 		</groups>
 	</test>
     </playlist>
