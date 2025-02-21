@@ -310,7 +310,28 @@
 		</javac>
 	</target>
 
-	<target name="dist" depends="build-jtrunner" description="generate the distribution">
+	<target name="getArctic" depends="create-bin-dir">
+		<var name="FILE_NAME" value="arctic.jar"/>
+		<if>
+			<available file="${FILE_NAME}" type="file" />
+			<then>
+				<echo message="${FILE_NAME} exists. Hence, not downloading it." />
+			</then>
+			<else>
+			<var name="curl_options" value="-Lks -C - https://ci.adoptium.net/job/test.getDependency/lastSuccessfulBuild/artifact/ -o arctic.jar"/>
+			<retry retrycount="3">
+				<sequential>
+					<echo message="curl ${curl_options}" />
+					<exec executable="curl" failonerror="true">
+						<arg line="${curl_options}" />
+					</exec>
+				</sequential>
+			</retry>
+			</else>
+		</if>
+	</target>
+
+	<target name="dist" depends="build-jtrunner,getArctic" description="generate the distribution">
 		<copy todir="${DEST}">
 			<fileset dir="${basedir}">
 				<exclude name="jck_root/" />
