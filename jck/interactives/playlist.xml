@@ -30,26 +30,26 @@
 		</groups>
 	</test>
     	<test>
-		<testCaseName>jckinteractives_aw</testCaseName>
+		<testCaseName>jckinteractives_java_awt</testCaseName>
 		<variations>
 			<variation>NoOptions</variation>
 		</variations>
-		<command>echo "run arctic command for awt" \
+		<command>$(TEST_ROOT)/jck/interactives/arctic_tests/runArctic.sh -jck_awt\
 		$(TEST_STATUS);
 		</command>
 		<levels>
-			<level>special</level>
+			<level>dev</level>
 		</levels>
 		<groups>
 			<group>jck</group>
 		</groups>
 	</test>
     	<test>
-		<testCaseName>jckinteractives_sw</testCaseName>
+		<testCaseName>jckinteractives_javax_swing</testCaseName>
 		<variations>
 			<variation>NoOptions</variation>
 		</variations>
-		<command>echo "run arctic command for swing+" \
+		<command>echo "run arctic command for running swing recordings, $(TEST_ROOT)/jck/interactives/arctic_tests" \
 		$(TEST_STATUS);
 		</command>
 		<levels>
