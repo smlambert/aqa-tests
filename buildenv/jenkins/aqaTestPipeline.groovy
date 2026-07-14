@@ -877,6 +877,9 @@ def remoteTriggerTemurinJCK (jobJdkVersion, jobPlatforms) {
                     "${URLEncoder.encode(k, 'UTF-8')}=${URLEncoder.encode(v.toString(), 'UTF-8')}"
                 }.join('&')
                 def rerunUrl = "${env.JENKINS_URL}job/AQA_Test_Pipeline_JCK/parambuild?${queryString}&MODE=RELAY"
+
+                def minimalJobName = "Test_openjdk${jobJdkVersion}_hs_${target}_${platform}_rerun"
+                def rerunMinimalUrl = "${env.JENKINS_URL}job/AQA_Rebuild_Remote_JCK/parambuild?REMOTE_JOB_NAME=${URLEncoder.encode(minimalJobName, 'UTF-8')}"
                 
                 currentBuild.description += """
                     <p>${displayName} : ${target}:
@@ -884,6 +887,7 @@ def remoteTriggerTemurinJCK (jobJdkVersion, jobPlatforms) {
                         <img src="${remoteBadgeUrl}" />
                     </a>
                     <a href="${rerunUrl}" target="_blank" style="margin-left: 10px; font-size: 11px;">[rerun]</a>
+                    <a href="${rerunMinimalUrl}" target="_blank" style="margin-left: 10px; font-size: 11px;">[rerun minimal]</a>
                     </p>
                 """
                 
@@ -1053,6 +1057,9 @@ def remoteTriggerTemurinJCKDirect() {
                 "${URLEncoder.encode(k, 'UTF-8')}=${URLEncoder.encode(v.toString(), 'UTF-8')}"
             }.join('&')
             def rerunUrl = "${env.JENKINS_URL}job/AQA_Test_Pipeline_JCK/parambuild?${queryString}&MODE=RELAY"
+
+            def minimalJobName = "Test_openjdk${jobJdkVersion}_hs_${target}_${platform}_rerun"
+            def rerunMinimalUrl = "${env.JENKINS_URL}job/AQA_Rebuild_Remote_JCK/parambuild?REMOTE_JOB_NAME=${URLEncoder.encode(minimalJobName, 'UTF-8')}"
             
             currentBuild.description += """
                 <p>${target} on ${platform} (JDK${jobJdkVersion}):
@@ -1060,6 +1067,7 @@ def remoteTriggerTemurinJCKDirect() {
                     <img src="${remoteBadgeUrl}" />
                 </a>
                 <a href="${rerunUrl}" target="_blank" style="margin-left: 10px; font-size: 11px;">[rerun]</a>
+                <a href="${rerunMinimalUrl}" target="_blank" style="margin-left: 10px; font-size: 11px;">[rerun minimal]</a>
                 </p>
             """
             
